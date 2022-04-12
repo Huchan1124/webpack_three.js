@@ -1,6 +1,6 @@
 import "./style.css"
 import * as THREE from "three"
-
+import gsap from "gsap"
 
 // DOM & sizes
 const canvas = document.querySelector('.webgl');
@@ -53,10 +53,18 @@ const tick = () => {
 
     const elapsedTime = clock.getElapsedTime();
 
-
+    // Update objects
+    // mesh.rotation.y = elapsedTime;
 
     // Update objects
-    mesh.rotation.y = elapsedTime;
+    // mesh.position.x = Math.cos(elapsedTime)
+    // mesh.position.y = Math.sin(elapsedTime)
+
+    // Update objects
+    // camera.position.x = Math.cos(elapsedTime)
+    // camera.position.y = Math.sin(elapsedTime)
+    // camera.lookAt(mesh.position)
+
 
     // Render
     renderer.render(scene, camera)
@@ -65,4 +73,18 @@ const tick = () => {
     window.requestAnimationFrame(tick)
 }
 
-tick()
+
+
+// tick()
+
+gsap.to(mesh.position, { duration: 1, delay: 1, y: 2, yoyo: true, repeat: -1 })
+    // gsap.to(mesh.position, { duration: 1, delay: 2, x: 0, repeat: -1 })
+const tick2 = () => {
+    // Render
+    renderer.render(scene, camera)
+
+    // Call tick again on the next frame
+    window.requestAnimationFrame(tick2)
+}
+
+tick2()
