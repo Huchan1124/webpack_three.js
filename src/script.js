@@ -1,6 +1,6 @@
 import "./style.css"
 import * as THREE from "three"
-import gsap from "gsap"
+
 
 // DOM & sizes
 const canvas = document.querySelector('.webgl');
@@ -8,6 +8,20 @@ const sizes = {
     width: window.innerWidth,
     height: window.innerHeight
 };
+
+// cursor 
+
+const cursor = {
+    x: 0,
+    y: 0
+};
+
+window.addEventListener('mousemove', (e) => {
+    cursor.x = e.clientX / sizes.width - 0.5;
+    cursor.y = -(e.clientY / sizes.height - 0.5);
+    console.log(cursor.y)
+
+})
 
 
 //Create Three.js Scene
@@ -38,7 +52,7 @@ const renderer = new THREE.WebGLRenderer({
 });
 
 renderer.setSize(sizes.width, sizes.height);
-renderer.setClearColor("#006868", .8)
+renderer.setClearColor("#006868", .8);
 renderer.render(scene, camera);
 
 
@@ -54,16 +68,12 @@ const tick = () => {
     const elapsedTime = clock.getElapsedTime();
 
     // Update objects
-    // mesh.rotation.y = elapsedTime;
 
-    // Update objects
-    // mesh.position.x = Math.cos(elapsedTime)
-    // mesh.position.y = Math.sin(elapsedTime)
+    camera.position.x = Math.sin(cursor.x * Math.PI * 2) * 3;
+    camera.position.z = Math.cos(cursor.x * Math.PI * 2) * 3;
+    camera.position.y = cursor.y * 5;
 
-    // Update objects
-    // camera.position.x = Math.cos(elapsedTime)
-    // camera.position.y = Math.sin(elapsedTime)
-    // camera.lookAt(mesh.position)
+    camera.lookAt(mesh.position)
 
 
     // Render
@@ -75,16 +85,4 @@ const tick = () => {
 
 
 
-// tick()
-
-gsap.to(mesh.position, { duration: 1, delay: 1, y: 2, yoyo: true, repeat: -1 })
-    // gsap.to(mesh.position, { duration: 1, delay: 2, x: 0, repeat: -1 })
-const tick2 = () => {
-    // Render
-    renderer.render(scene, camera)
-
-    // Call tick again on the next frame
-    window.requestAnimationFrame(tick2)
-}
-
-tick2()
+tick()
