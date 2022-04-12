@@ -46,20 +46,17 @@ renderer.render(scene, camera);
  * Animate
  */
 
-let time = Date.now();
-console.log(`time:${time}`);
+const clock = new THREE.Clock();
 
 
 const tick = () => {
 
-    const currentTime = Date.now();
-    const deltaTime = currentTime - time;
+    const elapsedTime = clock.getElapsedTime();
 
-    time = currentTime;
 
 
     // Update objects
-    mesh.rotation.y += 0.01 * deltaTime;
+    mesh.rotation.y = elapsedTime;
 
     // Render
     renderer.render(scene, camera)
