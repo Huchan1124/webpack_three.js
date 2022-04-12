@@ -19,8 +19,6 @@ const cursor = {
 window.addEventListener('mousemove', (e) => {
     cursor.x = e.clientX / sizes.width - 0.5;
     cursor.y = -(e.clientY / sizes.height - 0.5);
-    console.log(cursor.y)
-
 })
 
 
@@ -33,7 +31,6 @@ const geometry = new THREE.BoxGeometry(1, 1, 1)
 const material = new THREE.MeshBasicMaterial({ color: '#8FE4F4' })
 const mesh = new THREE.Mesh(geometry, material)
 scene.add(mesh)
-
 
 
 //Create Camera
@@ -59,9 +56,8 @@ renderer.setClearColor("#006868", .8);
 renderer.render(scene, camera);
 
 
-/**
- * Animate
- */
+//Animate
+
 
 const clock = new THREE.Clock();
 
