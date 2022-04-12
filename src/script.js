@@ -22,17 +22,32 @@ const material = new THREE.MeshBasicMaterial({
 
 
 
-const cylinder = new THREE.Mesh(geometry, material);
-scene.add(cylinder);
+const mesh = new THREE.Mesh(geometry, material);
+scene.add(mesh);
 
+mesh.position.x = 1;
+mesh.position.y = 2;
+mesh.position.z = -2;
+
+mesh.rotation.x = Math.PI * 0.25;
+mesh.rotation.y = Math.PI * 0.25;
 
 
 //Create Camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height);
-camera.position.z = 5;
+camera.position.z = 3;
 
 scene.add(camera)
 
+console.log(mesh.position.length())
+console.log(mesh.position.distanceTo(camera.position))
+console.log(mesh.position.normalize())
+
+/**
+ * Axes Helper
+ */
+const axesHelper = new THREE.AxesHelper(3)
+scene.add(axesHelper)
 
 // Renderer
 
@@ -41,4 +56,5 @@ const renderer = new THREE.WebGLRenderer({
 });
 
 renderer.setSize(sizes.width, sizes.height);
+renderer.setClearColor("#006868", .8)
 renderer.render(scene, camera);
